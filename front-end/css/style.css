@@ -1,0 +1,24 @@
+.jumbotron{
+  background-image:url("../logo.png");
+  background-repeat: no-repeat ;}
+  .produites-container{
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  }
+img{
+  width: 80%;
+}
+.produit{
+  width: 50%;
+  text-align: center;
+  border: 1px solid  #0000001f;
+  box-shadow:  3px 3px 3px 3px rgba(255, 0, 12, 0.08);
+  margin: auto;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.produites__infos{
+ border-top: 0.5px solid  #0000001f;
+ border-radius: 20px 20px 0px 0px;
+}
