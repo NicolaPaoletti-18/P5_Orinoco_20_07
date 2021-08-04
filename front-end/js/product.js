@@ -12,6 +12,7 @@ const numberObj = document.querySelector("#numero");
 const colorSelect = document.querySelector("#color-select");
 
 
+
 main();
 
 function main(){
@@ -35,18 +36,20 @@ function getArticles(){
   container.style.padding = "40px 0";
 })
 //Données recues via API 
-.then(function (resultatAPI) {
-  articles = resultatAPI;
-  productCardName.innerHtml = article.name;
+.then(function (article) {
+
+  
+  productCardName.innerText = article.name;
   productCardImg.src = article.imageUrl;
   productCardDescription.innerText = article.description;
 
 //Prix affiché en euros 
 article.price = article.price / 100;
-productCardPrice.innerHtml = new Intl.NumberFormat("fr-FR",{
+productCardPrice.innerText = new Intl.NumberFormat("fr-FR",{
   style: "currency",
   currency: "EUR",
-}).format(article.price);
+  
+}).format(article.price); 
 
 let colorSelect = document.getElementById("color-select");
 for (let i = 0; i < article.colors.length ; i++){
@@ -68,9 +71,9 @@ function AddToCarts(){
  AddToCartsBtn.addEventListemer("click", () => {
    // if num est > 0 // num <100 
    if (numberObj > 0 && numberObj < 100) {
-   // --- produit qui sera ajouté au panier 
+   // --- produit qui sera ajouté au panier ...
    let productAdded = {
-     name : productCardName.innerHtml,
+     name : productCardName.innerText,
      price: parseFloat(productCardPrice),
      quantity: parseFloat(document.querySelector("#numero").value),
      _id: id,
