@@ -6,9 +6,15 @@
   display: flex;
   flex-wrap: wrap;
   }
+  
+  .stretched-link:hover{
+  text-decoration: none;
+  }
+
 img{
   width: 80%;
-}
+  height: 200px;}
+
 .produit{
   width: 50%;
   text-align: center;
@@ -21,4 +27,5 @@ img{
 .produites__infos{
  border-top: 0.5px solid  #0000001f;
  border-radius: 20px 20px 0px 0px;
+ text-decoration: none;
 }

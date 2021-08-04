@@ -39,44 +39,44 @@
     </div>
   </div>
   <h1 class="jumbotron"style="padding: 9rem;"></h1>
-   <div class="product-container">
+  <main>
     <div class="container">
       <div class="product-card">
           <div class="product-card__img">
               <img src="" alt="" class="img">
           </div>
           <div class="product-card__infos">
-              <div class="product-card__infos__title"></div>
-              <div class="product-card__infos__description"></div>
-              <div class="product-card__infos__price"></div>
-              <div class="product-card__infos__quantity">
-                  <label for="bearNum">Quantité :</label>
-                  <input id="bearNum" type="number" name="bearNum" value="1" min="1">
+              <div class="product-card__title"></div>
+              <div class="product-card__description"></div>
+              <div class="product-card__price"></div>
+              <div class="product-card__quantity">
+                  <label for="numero">Quantité :</label>
+                  <input id="numero" type="number" name="numero" value="1" min="1">
               </div>
-              <div class="product-card__infos__color">
+              <div class="product-card__color">
                   <label for="color-select">Couleur :</label>
                   <select name="color" id="color-select">
                   </select>
               </div>
-              <div class="added-to-cart-confirmation">
+              <div class="ajouter-cart-confirmation">
                   <p class="confirmation-text"></p>
               </div>
-              <div class="product-card__infos__buttons">
+              <div class="product-card__buttons">
                   <a href="index.html">
-                      <div class="product-card__infos__button back-to-home">
-                          Revenir aux peluches
+                      <div class="product-card__button back-to-home">
+                          Revenir aux forniture
                       </div>
                   </a>
                   <a href="#">
-                      <div class="product-card__infos__button add-to-cart">
+                      <div class="product-card__button ajouter-card">
                           Ajouter au panier
                       </div>
                   </a>
               </div>
           </div>
       </div>
-  </div>
-  </div>
+    </div>
+  </main>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">© 2020-2021 ORONICO</p>
@@ -87,5 +87,6 @@
     </ul>
   </footer>
     <!-- JS -->
+    <script src="js/product.js"></script>
   </body>
   </html>

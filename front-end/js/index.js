@@ -1,5 +1,4 @@
 main();
-
 function main() {
   getArticles();
 }
@@ -7,8 +6,8 @@ function main() {
 // Récupérer les articles depuis l'API
 function getArticles() {
   fetch(" http://localhost:3000/api/furniture ")
-    .then(function (res) {
-      return res.json();
+    .then(function (rep) {
+      return rep.json();
     })
     .catch((error) => {
       let productsContainer = document.querySelector(".container");
