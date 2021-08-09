@@ -9,7 +9,7 @@ const productCardName = document.querySelector(".product-card__title");
 const productCardDescription = document.querySelector(".product-card__description");
 const productCardPrice = document.querySelector(".product-card__price");
 const numberObj = document.querySelector("#numero");
-const colorSelect = document.querySelector("#color-select");
+const verniceSelect = document.querySelector("#vernice-select");
 
 
 
@@ -28,6 +28,7 @@ function getArticles(){
   fetch(` http://localhost:3000/api/furniture/${id}`)
   .then(function (reponse) {
   return reponse.json();
+  
 })
 .catch((error) => {
   let container = document.querySelector(".container");
@@ -37,7 +38,7 @@ function getArticles(){
 })
 //Données recues via API 
 .then(function (article) {
-
+console.log(article)
   
   productCardName.innerText = article.name;
   productCardImg.src = article.imageUrl;
@@ -51,11 +52,11 @@ productCardPrice.innerText = new Intl.NumberFormat("fr-FR",{
   
 }).format(article.price); 
 
-let colorSelect = document.getElementById("color-select");
+let verniceSelect = document.getElementById("vernice-select");
 for (let i = 0; i < article.colors.length ; i++){
   let option = document.createElement("option");
-  option.innerText = article.colors[i];
-  colorSelect.appendChild(option);
+  option.innerText = article.vernice[i];
+  verniceSelect.appendChild(option);
   }
 
  });
@@ -63,10 +64,10 @@ for (let i = 0; i < article.colors.length ; i++){
 }
 
 
-function AddToCarts(){
- const AddToCartsBtn = document.querySelector("..add-to-cart");
+function AjoutPanier(){
+ const AddToCartsBtn = document.querySelector(".add-to-cart");
  const confirmation = document.querySelector(".added-to-cart-confirmation");
- const textConfirmation = documenr.querySelector(".confirmation-text");
+ const textConfirmation = document.querySelector(".confirmation-text");
 
  AddToCartsBtn.addEventListemer("click", () => {
    // if num est > 0 // num <100 
@@ -95,7 +96,7 @@ function AddToCarts(){
 
 
    confirmation.style.visibility = "visible";
-   textConfirmation.innerHtml = 'Vous avez ajouté ${numberObj.value} forniture a votre panier!';
+   textConfirmation.innerHTML = `Vous avez ajouté ${numberObj.value} forniture a votre panier!`;
    setTimeout("locatio.reload(true)", 4000);
    } else{
      confirmation.style.visibility = "visible";

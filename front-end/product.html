@@ -28,19 +28,15 @@
           <li class="nav-item active">
             <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item active"> <a class="nav-link w-10" href="panier.html"><i class="fas fa-shopping-cart color-black"></i></a></li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <a class="nav-link w-10" href="panier.html"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
     </div>
   </div>
-  <h1 class="jumbotron"style="padding: 9rem;"></h1>
+  <h1 class="jumbotron lg-sm mt-5">Le meilleur site pour trouver vos meubles de qualité à des prix avantageux  </h1>
   <main>
-    <div class="container">
+    <div class="container text-center">
       <div class="product-card">
           <div class="product-card__img">
               <img src="" alt="" class="img">
@@ -53,22 +49,23 @@
                   <label for="numero">Quantité :</label>
                   <input id="numero" type="number" name="numero" value="1" min="1">
               </div>
-              <div class="product-card__color">
-                  <label for="color-select">Couleur :</label>
-                  <select name="color" id="color-select">
+              <div class="product-card__vernice">
+                  <label for="vernice-select">Vernice :</label>
+                  <select name="vernice" id="vernice-select">
+                    color-black
                   </select>
               </div>
-              <div class="ajouter-cart-confirmation">
+              <div class="ajouter-panier-confirmation">
                   <p class="confirmation-text"></p>
               </div>
-              <div class="product-card__buttons">
+              <div class="product-card__buttons ">
                   <a href="index.html">
                       <div class="product-card__button back-to-home">
                           Revenir aux forniture
                       </div>
                   </a>
                   <a href="#">
-                      <div class="product-card__button ajouter-card">
+                      <div class="product-card__button ajouter-panier">
                           Ajouter au panier
                       </div>
                   </a>

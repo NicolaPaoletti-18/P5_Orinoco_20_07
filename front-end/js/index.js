@@ -5,7 +5,7 @@ function main() {
 
 // Récupérer les articles depuis l'API
 function getArticles() {
-  fetch(" http://localhost:3000/api/furniture ")
+  fetch("  http://localhost:3000/api/furniture")
     .then(function (rep) {
       return rep.json();
     })
@@ -23,8 +23,8 @@ function getArticles() {
       console.log(articles);
       for (let article in articles) {
         let productCard = document.createElement("div");
-        document.querySelector(".produites-container").appendChild(productCard);
-        productCard.classList.add("produit");
+        document.querySelector(".productes-container").appendChild(productCard);
+        productCard.classList.add("product");
 
         let productLink = document.createElement("a");
         productCard.appendChild(productLink);
@@ -33,7 +33,7 @@ function getArticles() {
 
         let productImgDiv = document.createElement("div");
         productLink.appendChild(productImgDiv);
-        productImgDiv.classList.add("produit__img");
+        productImgDiv.classList.add("product__img");
 
         let productImg = document.createElement("img");
         productImgDiv.appendChild(productImg);
@@ -41,16 +41,16 @@ function getArticles() {
 
         let productInfosDiv = document.createElement("div");
         productLink.appendChild(productInfosDiv);
-        productInfosDiv.classList.add("produites__infos");
+        productInfosDiv.classList.add("productes__infos");
 
         let productInfoTitle = document.createElement("div");
         productInfosDiv.appendChild(productInfoTitle);
-        productInfoTitle.classList.add("produites__infos__title");
+        productInfoTitle.classList.add("productes__infos__title");
         productInfoTitle.innerHTML = resultatAPI[article].name;
 
         let productInfoPrice = document.createElement("div");
         productInfosDiv.appendChild(productInfoPrice);
-        productInfoPrice.classList.add("produit__infos__price");
+        productInfoPrice.classList.add("product__infos__price");
 
         // afficher en euros
         resultatAPI[article].price = resultatAPI[article].price / 100;
