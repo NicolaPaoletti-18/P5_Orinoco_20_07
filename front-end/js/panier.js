@@ -1,11 +1,8 @@
-
-
 let panier = document.querySelector(".panier-card__container");
 let copyLS = JSON.parse(localStorage.getitem("products"));
 
 
 main();
-
 
 function main(){
 
@@ -19,7 +16,7 @@ function main(){
 function displayPanier(){
   let test = document.querySelector(".width-to-empty-panier");
   let panierCard = document.querySelector(".panier-card");
-  let emptyPanier = document.querySelector(".to-empty-panier");
+  let emptyPanier = document.querySelector(".if-empty-panier");
 
 if(localStorage.getItem("products")){
   panierCard.style.display = "flex";
@@ -58,7 +55,7 @@ for( let produit in copyLS) {
     productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "EUR",
-    }).format(copyOfLS[produit].price * copyOfLS[produit].quantity);
+    }).format(copyOfLS[produits].price * copyOfLS[produits].quantity);
  
   }
 
@@ -86,7 +83,7 @@ function  priceTotalPanier() {
 
   // sommer les valeurs pour avoir PRIXTOTAL 
   const reducer = ( acc, currentVal) => acc + currentVal;
-  arrayOfPrice = arrayOfPrice.reducer(reducer);
+  arrayOfPrice = arrayOfPrice.reduce(reducer);
 
   totalPrice.innerText = `Total : ${(arrayOfPrice = new Intl.NumberFormat(
     "fr-FR",
@@ -157,10 +154,10 @@ submit.addEventListener("click", (e) => {
    const options = {
      method: "POST",
      body: JSON.stringify(order),
-     Headers: {"content-Type":application/json},
+     headers: {"Content-Type":"application/json"},
    };
 
-  // PRIX DORMATé pour la page commande 
+  // PRIX DOmandé pour la page commande 
 
   let priceConfirmation = document.querySelector(".total").innerText;
   priceConfirmation = priceConfirmation.split(":");
@@ -170,10 +167,9 @@ submit.addEventListener("click", (e) => {
   fetch(" http://localhost:3000/api/furniture/order", options).then((response)=> response.json())
   .then((data) => {
     localStorage.clear();
-    console.log(data);
-    localStorage.setItem("orderId", data.orderId);
+    localStorage.setItem("commandeId", data.commandeId);
     localStorage.setItem("total", priceConfirmation[1]);
- 
+   
 
     document.location.href = "commande.html";
   })

@@ -16,12 +16,25 @@ const verniceSelect = document.querySelector("#vernice-select");
 main();
 
 function main(){
+  
+  checkIf404();
   getArticles();
   AjoutPanier();
-  checkIf404();
+  
 }
 
-
+function checkIf404() {
+  window.addEventListener("error", (e) => {
+      let container = document.querySelector(".product-card");
+      container.innerHTML = `<p>Cette page n'existe pas.</br> <a class="back-to-home" href="index.html">Retourner dans la boutique ?</a></p>`;
+      container.style.padding = "40vh 0";
+      container.style.fontSize = "26px";
+      let backToHomeLink = document.querySelector(".back-to-home");
+      backToHomeLink.style.textDecoration = "underline";
+    },
+    false
+  );
+}
 // Récupère le  produit dont on a besoin avec le peramètre dans la requete 
 function getArticles(){
 
@@ -32,7 +45,7 @@ function getArticles(){
 })
 
 .catch((error) => {
-  let container = document.querySelector(".container");
+  let container = document.querySelector(".product-card");
   container.innerHtml= "<p>Nous n'avons pas réussi à afficher la page</p>"; 
   container.style.TextAlign ="center";
   container.style.padding = "40px 0";
@@ -40,7 +53,6 @@ function getArticles(){
 //Données recues via API 
 .then(function (article) {
 
-  
   productCardName.innerText = article.name;
   productCardImg.src = article.imageUrl;
   productCardDescription.innerText = article.description;
@@ -53,10 +65,10 @@ productCardPrice.innerText = new Intl.NumberFormat("fr-FR",{
   
 }).format(article.price); 
 
-let verniceSelect = document.getElementById("vernice-select");
-for (let i = 0; i < article.colors.length ; i++){
+let verniceSelect = document.getElementById("#vernice-select");
+for (let i = 0; i < verniceSelect.length ; i++){
   let option = document.createElement("option");
-  option.innerText = article.vernice[i];
+  option.innerHtml = article.vernice[i];
   verniceSelect.appendChild(option);
   }
 
@@ -67,7 +79,7 @@ for (let i = 0; i < article.colors.length ; i++){
 
 function AjoutPanier(){
  const AddToCartsBtn = document.querySelector(".ajouter-panier");
- const confirmation = document.querySelector(".ajouté-panier-confirmation");
+ const confirmation = document.querySelector(".ajouter-panier-confirmation");
  const textConfirmation = document.querySelector(".confirmation-text");
 
  AddToCartsBtn.addEventListener("click", () => {
@@ -99,10 +111,10 @@ function AjoutPanier(){
    confirmation.style.visibility = "visible";
    textConfirmation.innerText = `Vous avez ajouté ${numberObj.value} forniture a votre panier!`;
    setTimeout("locatio.reload(true);", 4000);
-   } else{
+   } else {
      confirmation.style.visibility = "visible";
-     textConfirmation.style.background = "green";
-     textConfirmation.style.border = "green";
+     textConfirmation.style.background = "red";
+     textConfirmation.style.border = "red";
      textConfirmation.style.color = "white";
      textConfirmation.style.whiteSpace = "normal";
      textConfirmation.innerText = `La quantité doit être comprise entre 1 et 50.`;
@@ -113,15 +125,3 @@ function AjoutPanier(){
 }
 
 
-function checkIf404() {
-  window.addEventListener("error", (e) => {
-      let container = document.querySelector(".product-card");
-      container.innerHTML = `<p>Cette page n'existe pas.</br> <a class="back-to-home" href="index.html">Retourner dans la boutique ?</a></p>`;
-      container.style.padding = "40vh 0";
-      container.style.fontSize = "26px";
-      let backToHomeLink = document.querySelector(".back-to-home");
-      backToHomeLink.style.textDecoration = "underline";
-    },
-    false
-  );
-}

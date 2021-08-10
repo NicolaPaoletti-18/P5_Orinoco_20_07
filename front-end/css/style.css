@@ -62,6 +62,7 @@ img{
   width: 80%;
   margin: auto;
 }
+
 .product-card__img{
   
   padding-top: 20px;
@@ -74,12 +75,12 @@ img{
 }
 
 .product-card__title{
-  padding: 2pc;
+  padding: 2%;
   font-size: 2pc;
 }
 .product-card__price{
   font-size: 1.4pc;
-  padding: 2pc;
+  padding: 2%;
 }
 .product-card__buttons{
   display: flex;
@@ -117,11 +118,14 @@ background-color: rgb(208, 206, 206);
   object-fit: contain;
 }
 .panier-card{
-  border: 1px solid;
   padding: 10px;
   border-radius: 20px;
   background-color: rgba(253, 251, 251, 0.987);
   margin: 10px;
+}
+.panier-card__row{
+  display: flex;
+  justify-content: space-around;
 }
 .to-empty-panier{
   border: 0.5px solid red;
@@ -142,6 +146,7 @@ background-color: rgba(243, 134, 134, 0.953);
 .name-and-lastname{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .to-pay{
   border: 1px solid;
@@ -159,6 +164,7 @@ background-color: rgba(243, 134, 134, 0.953);
 .postal-and-city{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-top: 30px;
 }
 #bloc__adress{
