@@ -14,5 +14,6 @@ function  displayCommandeEtTotalPrice(){
   commandeId.innerText = localStorage.getItem("commandeId");
 
   // après on vide le panier pour recommencer a acheter
-  localStorage.clear(); 
+  localStorage.clear();
+  
 }
