@@ -1,8 +1,8 @@
-let panier = document.querySelector(".panier-card__container");
-let copyLS = JSON.parse(localStorage.getitem("products"));
+let panier = document.querySelector(".panier-card__recap");
+let copyLS = JSON.parse(localStorage.getItem("products"));
+ 
 
-
-main();
+main ();
 
 function main(){
 
@@ -22,8 +22,10 @@ if(localStorage.getItem("products")){
   panierCard.style.display = "flex";
   panierCard.style.flexDirection = "column";
   panierCard.style.justifyContent = "space-around";
-  emptyPanier.style.display = "none";
-}
+ 
+} 
+
+
 
 
 // Chaque objet dans le tableu copié du LS, on va a crée des divs de l'affichage du panier et on va à les remplit avec les données du tableu.
@@ -55,7 +57,7 @@ for( let produit in copyLS) {
     productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "EUR",
-    }).format(copyOfLS[produits].price * copyOfLS[produits].quantity);
+    }).format(copyLS[produit].price * copyLS[produit].quantity);
  
   }
 
@@ -65,7 +67,7 @@ for( let produit in copyLS) {
 function  priceTotalPanier() {
   let arrayOfPrice = [];
   let totalPrice = document.querySelector (".total");
-
+  
   // Chaque prix du DOM dans un tableu 
   let productPriceAvecQuantity = document.querySelector(".price");
 
@@ -84,7 +86,7 @@ function  priceTotalPanier() {
   // sommer les valeurs pour avoir PRIXTOTAL 
   const reducer = ( acc, currentVal) => acc + currentVal;
   arrayOfPrice = arrayOfPrice.reduce(reducer);
-
+ 
   totalPrice.innerText = `Total : ${(arrayOfPrice = new Intl.NumberFormat(
     "fr-FR",
     {
@@ -92,18 +94,31 @@ function  priceTotalPanier() {
       currency: "EUR",
     }
   ).format(arrayOfPrice))}`;
-}
+ 
+} 
   
 function toEmptyPanier() {
-// on clique sur le btn, le panier se vide ainsi le LS 
 
-const buttonToEmptyPanier = document.querySelector(".to-empty-panier");
-buttonToEmptyPanier.addEventListener("click",() =>{
-  localStorage.clear();
-  });
+  // Lorsque qu'on clique sur le btn, le panier se vide ainsi que le localStorage
+  const btnToEmptyCart = document.querySelector(".to-empty-panier");
+  console.log(btnToEmptyCart);
+
+  //suppression de la key "products" du LS pour vider entierament le panier  
+  btnToEmptyCart.addEventListener('click', (e) => {
+    e.preventDefault;
+    localStorage.removeItem("products");
+
+    // alert panier vide 
+    alert("le panier  à étè vide");
+
+
+    // rechargament de la page 
+    window.location.href = "panier.html";
+    });
 }
-function checkFormAndPostRequest() {
 
+function checkFormAndPostRequest() {
+   
   // Inputs récupère dans le DOM. 
   const submit = document.querySelector("#submit");
   let inputName = document.querySelector("#name");
@@ -118,6 +133,7 @@ function checkFormAndPostRequest() {
 
 submit.addEventListener("click", (e) => {
   if (
+
     !inputName.value ||
     !inputLastName.value ||
     !inputPostal.value ||
@@ -126,21 +142,21 @@ submit.addEventListener("click", (e) => {
     !inputMail.value ||
     !inputPhone.value 
   ) {
+       // si form est valide, le tableu ProductsAchet contiendra l'objet qui sont (produit acheté), et order contiedra ce tableu et l'bjet qui contient les infos User
+   let productsBought = [];
+
+   productsBought.push(copyLS);
+
+
+  } else {
     erreur.innerText = "reseigner tous les champs! ERREUR";
     e.preventDefault();
-  } else if (isNaN(inputPhone.value)) {
-    e.preventDefault();
-    erreur.innerText = "Votre numéero n'est pas valide";
-  } else {
-   // si form est valide, le tableu ProductsAchet contiendra l'objet qui sont (produit acheté), et order contiedra ce tableu et l'bjet qui contient les infos User
-   let productsBought = [];
-   productsBought.push(copyLS);
 
    const order = {
      contact: {
        firstName: inputName.value,
        lastName: inputLastName.value,
-       city:inputCity.value,
+       city: inputCity.value,
        address: inputAdress.value,
        email: inputMail.value,
      },
@@ -159,7 +175,7 @@ submit.addEventListener("click", (e) => {
 
   // PRIX DOmandé pour la page commande 
 
-  let priceConfirmation = document.querySelector(".total").innerText;
+  let priceConfirmation = document.querySelector(".total").innerHTML;
   priceConfirmation = priceConfirmation.split(":");
 
 

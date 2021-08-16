@@ -40,7 +40,7 @@
   <div class="container">
       <div class="panier-card">
           <h2 class="panier">Votre panier</h2>
-          <div class="panier-card__container">
+          <div class="panier-card__recap">
             <div class="panier-card__row ">
               <div class="panier-card type-line">Nom: </div>
               <div class="panier-card title-quantity type-line">Quantité: </div>
@@ -48,18 +48,17 @@
 
               </div>                     
               <div class="width-to-empty-panier text-center">
-                  <a href="panier.html">
-                      <div class="panier-card__form__button to-empty-panier ">
+                  
+                      <button type="reset" class="to-empty-panier p-3 mt-3 rounded bg-danger text-white">
                           Vider le panier
-                      </div>
-                  </a>
+                      </button>
               </div>
               <h2 class="total"></h2>            
           </div>
 
           <div class="panier-card__form">
               <h2>Votre adresse de livraison</h2>
-              <form class="form">
+              <form class="form" method="POST" >
                   <div class="name-and-lastname">
                       <div class="cart-card__form-line" id="bloc__name">
                           <label for="name">Prénom :</label>
@@ -70,7 +69,7 @@
                           <input type="text" placeholder="Nom" id="lastname" name="user_lastname" required>
                       </div>
                   </div>        
-                  <div class="postal-and-city">
+                  <div class="postal-and-city d-flex"  style="flex-wrap: wrap;">
                       <div class="panier-card__form-line" id="bloc__postal">
                           <label for="postal">Code postal :</label>
                           <input type="text" placeholder="Code postal" id="postal" name="user_postal" required>
@@ -80,21 +79,23 @@
                           <input type="text" placeholder="Ville" id="city" name="user_city" required>
                       </div>
                   </div>
-                  <div class="panier-card__form-line" id="bloc__adress">
-                      <label for="adress">Adresse :</label>
-                      <input type="text" placeholder="Adresse de livraison" id="adress" name="user_adress" required>
-                  </div>
-                  <div class="panier-card__form-line" id="bloc__mail">
-                      <label for="mail">Adresse mail :</label>
-                      <input type="email" placeholder="Adresse mail" id="mail" name="user_mail" required>
-                  </div>
-                  <div class="panier-card__form-line" id="bloc__phone">
-                      <label for="phone" >Numéro de téléphone :</label>
-                      <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
+                  <div class="contact d-flex " style="flex-wrap: wrap;">
+                    <div class="panier-card__form-line" id="bloc__adress">
+                        <label for="adress">Adresse :</label>
+                        <input type="text" placeholder="Adresse de livraison" id="adress" name="user_adress" required>
+                    </div>
+                    <div class="panier-card__form-line" id="bloc__mail">
+                        <label for="mail">Adresse mail :</label>
+                        <input type="email" placeholder="Adresse mail" id="mail" name="user_mail" required>
+                    </div>
+                    <div class="panier-card__form-line" id="bloc__phone">
+                        <label for="phone" >Numéro de téléphone :</label>
+                        <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
+                    </div>
                   </div>
                   <div class="erreur"></div>
-                  <div class="panier-card__form__buttons">
-                          <div id="submit" class="panier-card__form__button to-pay text-center" >Commander</div>
+                  <div class="panier-card__form__buttons  d-flex justify-content-center" >
+                          <button type="submit" id="submit" class="panier-card__form__button to-pay btn-primary w-50 text-center p-3 mt-3 rounded" >Commander</button>
                   </div>
               </form>
 
@@ -105,7 +106,8 @@
           </div>
 
       </div>
-
+      <div class="if-empty-panier">
+    </div>
   </div>
 </main>
 

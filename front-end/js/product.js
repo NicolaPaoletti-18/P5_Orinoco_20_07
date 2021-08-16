@@ -17,14 +17,14 @@ main();
 
 function main(){
   
-  checkIf404();
+  //checkIf404(); 
   getArticles();
   AjoutPanier();
   
 }
 
-function checkIf404() {
-  window.addEventListener("error", (e) => {
+ /* function checkIf404() {
+    window.addEventListener("error", (e) => {
       let container = document.querySelector(".product-card");
       container.innerHTML = `<p>Cette page n'existe pas.</br> <a class="back-to-home" href="index.html">Retourner dans la boutique ?</a></p>`;
       container.style.padding = "40vh 0";
@@ -33,8 +33,9 @@ function checkIf404() {
       backToHomeLink.style.textDecoration = "underline";
     },
     false
-  );
-}
+  ); 
+}*/
+
 // Récupère le  produit dont on a besoin avec le peramètre dans la requete 
 function getArticles(){
 
@@ -87,12 +88,12 @@ function AjoutPanier(){
    if (numberObj.value > 0 && numberObj.value < 100) {
    // --- produit qui sera ajouté au panier ...
    let productAdded = {
-     name : productCardName.innerHtml,
-     price: parseFloat(productCardPrice.innerHtml),
+     name : productCardName.innerText,
+     price: parseFloat(productCardPrice.innerText),
      quantity: parseFloat(document.querySelector("#numero").value),
      _id: id,
    };
-   
+   console.log("AjoutPanier");
 
    // ------ LOCALSTORAGE
    let arrayProductsInCart = [];

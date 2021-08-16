@@ -7,9 +7,9 @@ function main() {
 }
 
 function  displayCommandeEtTotalPrice(){
-  const totalConfirmation = document.querySelectorAll("display.price");
-  const commandeId = document.querySelector(".display-commandeId");
-
+  const totalConfirmation = document.querySelector("display-price span");
+  const commandeId = document.querySelector(".display-commandeId span");
+ 
   totalConfirmation.innerText = localStorage.getItem("total");
   commandeId.innerText = localStorage.getItem("commandeId");
 
