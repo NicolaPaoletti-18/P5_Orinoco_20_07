@@ -86,6 +86,7 @@ function AjoutPanier(){
  AddToCartsBtn.addEventListener("click", () => {
    // if num est > 0 // num <100 
    if (numberObj.value > 0 && numberObj.value < 100) {
+     
    // --- produit qui sera ajouté au panier ...
    let productAdded = {
      name : productCardName.innerText,
@@ -93,7 +94,7 @@ function AjoutPanier(){
      quantity: parseFloat(document.querySelector("#numero").value),
      _id: id,
    };
-   console.log("AjoutPanier");
+  
 
    // ------ LOCALSTORAGE
    let arrayProductsInCart = [];

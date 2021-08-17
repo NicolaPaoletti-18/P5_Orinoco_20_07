@@ -16,7 +16,7 @@ function main(){
 function displayPanier(){
   let test = document.querySelector(".width-to-empty-panier");
   let panierCard = document.querySelector(".panier-card");
-  let emptyPanier = document.querySelector(".if-empty-panier");
+ 
 
 if(localStorage.getItem("products")){
   panierCard.style.display = "flex";
@@ -42,7 +42,7 @@ for( let produit in copyLS) {
   let productQuantity = document.createElement("div");
   productRow.appendChild(productQuantity);
   productQuantity.classList.add("panier-card__title", "title-quantity");
-  productQuantity.innerHTML = copyLS[produit].name;
+  productQuantity.innerHTML = copyLS[produit].quantity;
 
   let productPrice = document.createElement("div");
   productRow.appendChild(productPrice);
@@ -85,7 +85,7 @@ function  priceTotalPanier() {
 
   // sommer les valeurs pour avoir PRIXTOTAL 
   const reducer = ( accumulator, currentValue) => accumulator + currentValue;
-  arrayOfPrice = arrayOfPrice.reduce(reducer,0);
+  arrayOfPrice = arrayOfPrice.reduce(reducer);
  
   totalPrice.innerHTML = `Total : ${(arrayOfPrice = new Intl.NumberFormat(
     "fr-FR",
@@ -107,12 +107,12 @@ function toEmptyPanier() {
     e.preventDefault();
     localStorage.removeItem("products");
 
-    // alert panier vide 
-    alert("le panier  à étè vide");
+    // ----alert panier vide 
+    alert(" LE PANIER A' été VIDE  Retour aux pages de produits ");
 
 
-    // rechargament de la page 
-    window.location.href = "panier.html";
+    // ----Retour aux pages de produits 
+    window.location.href = "index.html";
     });
 }
 
@@ -143,8 +143,7 @@ submit.addEventListener("click", (e) => {
   ) {
        // si form est valide, le tableu ProductsAchet contiendra l'objet qui sont (produit acheté), et order contiedra ce tableu et l'objet qui contient les infos User
    let productsBought = [];
-
-   productsBought.push(localStorage);
+   productsBought.push(copyLS);
 
 
   } else {
