@@ -48,8 +48,7 @@
 
               </div>                     
               <div class="width-to-empty-panier text-center">
-                  
-                      <button type="reset" class="to-empty-panier p-3 mt-3 rounded bg-danger text-white">
+                      <button  class="to-empty-panier p-3 mt-3 rounded bg-danger text-white">
                           Vider le panier
                       </button>
               </div>
@@ -59,37 +58,37 @@
           <div class="panier-card__form">
               <h2>Votre adresse de livraison</h2>
               <form class="form" method="POST" >
-                  <div class="name-and-lastname">
+                  <div class="name-and-lastname d-flex" style="justify-content: space-around ;flex-wrap:wrap">
                       <div class="cart-card__form-line" id="bloc__name">
-                          <label for="name">Prénom :</label>
+                          <label for="name"></label>
                           <input type="text" placeholder="Prénom" id="name" name="user_name" required> 
                       </div>
                       <div class="cart-card__form-line" id="bloc__lastname">
-                          <label for="lastname">Nom :</label>
+                          <label for="lastname"></label>
                           <input type="text" placeholder="Nom" id="lastname" name="user_lastname" required>
                       </div>
                   </div>        
-                  <div class="postal-and-city d-flex"  style="flex-wrap: wrap;">
+                  <div class="postal-and-city d-flex"  style="justify-content: space-around ;flex-wrap:wrap">
                       <div class="panier-card__form-line" id="bloc__postal">
-                          <label for="postal">Code postal :</label>
+                          <label for="postal"></label>
                           <input type="text" placeholder="Code postal" id="postal" name="user_postal" required>
                       </div>
                       <div class="panier-card__form-line" id="bloc__city">
-                          <label for="city">Ville :</label>
+                          <label for="city"></label>
                           <input type="text" placeholder="Ville" id="city" name="user_city" required>
                       </div>
                   </div>
-                  <div class="contact d-flex " style="flex-wrap: wrap;">
+                  <div class="contact d-flex " style="justify-content: space-around ;flex-wrap:wrap">
                     <div class="panier-card__form-line" id="bloc__adress">
-                        <label for="adress">Adresse :</label>
+                        <label for="adress"></label>
                         <input type="text" placeholder="Adresse de livraison" id="adress" name="user_adress" required>
                     </div>
                     <div class="panier-card__form-line" id="bloc__mail">
-                        <label for="mail">Adresse mail :</label>
+                        <label for="mail"></label>
                         <input type="email" placeholder="Adresse mail" id="mail" name="user_mail" required>
                     </div>
                     <div class="panier-card__form-line" id="bloc__phone">
-                        <label for="phone" >Numéro de téléphone :</label>
+                        <label for="phone" ></label>
                         <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
                     </div>
                   </div>

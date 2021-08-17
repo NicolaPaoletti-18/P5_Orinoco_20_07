@@ -141,11 +141,6 @@ background-color: rgba(243, 134, 134, 0.953);
   background-color: #b4e4f2;
   padding: 10px;
 }
-.name-and-lastname{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 
 .to-pay:hover{
   background-color:rgb(128, 83, 252);

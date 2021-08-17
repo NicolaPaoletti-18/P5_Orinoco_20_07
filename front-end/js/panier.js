@@ -72,7 +72,7 @@ function  priceTotalPanier() {
   let productPriceAvecQuantity = document.querySelector(".price");
 
   for (let price in productPriceAvecQuantity) {
-    arrayOfPrice.push(productPriceAvecQuantity[price].innerHTML);
+    arrayOfPrice.push(productPriceAvecQuantity.innerHTML);
   }
 
   // eliminer undefined du tableu 
@@ -84,10 +84,10 @@ function  priceTotalPanier() {
   arrayOfPrice = arrayOfPrice.map((x) => parseFloat(x));
 
   // sommer les valeurs pour avoir PRIXTOTAL 
-  const reducer = ( acc, currentVal) => acc + currentVal;
-  arrayOfPrice = arrayOfPrice.reduce(reducer);
+  const reducer = ( accumulator, currentValue) => accumulator + currentValue;
+  arrayOfPrice = arrayOfPrice.reduce(reducer,0);
  
-  totalPrice.innerText = `Total : ${(arrayOfPrice = new Intl.NumberFormat(
+  totalPrice.innerHTML = `Total : ${(arrayOfPrice = new Intl.NumberFormat(
     "fr-FR",
     {
       style: "currency",
@@ -98,14 +98,13 @@ function  priceTotalPanier() {
 } 
   
 function toEmptyPanier() {
-
   // Lorsque qu'on clique sur le btn, le panier se vide ainsi que le localStorage
   const btnToEmptyCart = document.querySelector(".to-empty-panier");
-  console.log(btnToEmptyCart);
+ 
 
   //suppression de la key "products" du LS pour vider entierament le panier  
   btnToEmptyCart.addEventListener('click', (e) => {
-    e.preventDefault;
+    e.preventDefault();
     localStorage.removeItem("products");
 
     // alert panier vide 
@@ -142,10 +141,10 @@ submit.addEventListener("click", (e) => {
     !inputMail.value ||
     !inputPhone.value 
   ) {
-       // si form est valide, le tableu ProductsAchet contiendra l'objet qui sont (produit acheté), et order contiedra ce tableu et l'bjet qui contient les infos User
+       // si form est valide, le tableu ProductsAchet contiendra l'objet qui sont (produit acheté), et order contiedra ce tableu et l'objet qui contient les infos User
    let productsBought = [];
 
-   productsBought.push(copyLS);
+   productsBought.push(localStorage);
 
 
   } else {
@@ -187,7 +186,7 @@ submit.addEventListener("click", (e) => {
     localStorage.setItem("total", priceConfirmation[1]);
    
 
-    document.location.href = "commande.html";
+    window.location.href = "commande.html";
   })
 
   .catch((err) => {
