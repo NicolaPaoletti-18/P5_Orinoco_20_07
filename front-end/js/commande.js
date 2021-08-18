@@ -1,10 +1,8 @@
-main();
 
-function main() {
 
  displayCommandeEtTotalPrice();
 
-}
+
 
 function  displayCommandeEtTotalPrice(){
   const totalConfirmation = document.querySelector("display-price span");

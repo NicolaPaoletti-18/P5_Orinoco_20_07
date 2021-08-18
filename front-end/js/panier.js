@@ -68,11 +68,13 @@ function  priceTotalPanier() {
   let arrayOfPrice = [];
   let totalPrice = document.querySelector (".total");
   
+
   // Chaque prix du DOM dans un tableu 
   let productPriceAvecQuantity = document.querySelector(".price");
-
+  console.log(productPriceAvecQuantity);
   for (let price in productPriceAvecQuantity) {
     arrayOfPrice.push(productPriceAvecQuantity.innerHTML);
+    
   }
 
   // eliminer undefined du tableu 

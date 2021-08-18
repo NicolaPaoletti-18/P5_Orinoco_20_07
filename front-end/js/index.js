@@ -1,7 +1,6 @@
-main();
-function main() {
+
   getArticles();
-}
+
 
 // Récupérer les articles depuis l'API
 function getArticles() {
