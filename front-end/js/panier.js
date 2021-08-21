@@ -107,6 +107,7 @@ function checkFormAndPostRequest() {
 // check lors si apres le clic, si l'un des champs n'est pas rempli, on affiche une erreur. Aussi on verifie que dans le nombre il y a un nombre sinon erreur.
 
 submit.addEventListener("click", (e) => {
+  e.preventDefault();
   if (
     !inputName.value ||
     !inputLastName.value ||
@@ -166,8 +167,8 @@ submit.addEventListener("click", (e) => {
       .catch((err) => {
         alert("Il y a eu une erreur : " + err);
       });
-  }
-});
+    }
 
+  });
 
 }
