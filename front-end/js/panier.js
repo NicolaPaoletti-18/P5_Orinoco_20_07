@@ -44,8 +44,12 @@ function displayPanier() {
     productPrice.classList.add(
       "panier-card__title",
       "data-price",
-      "price"
-    );
+      "price",
+    )
+    let btnSupprimer = document.createElement("button");
+    btnSupprimer.classList.add("btnSupprimer");
+    productRow.appendChild(btnSupprimer);
+    btnSupprimer.innerText = "supprimer article";
 
     // Affichage du prix  €
     productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
@@ -68,7 +72,34 @@ function priceTotalPanier() {
 }
 
 
+//---- gestion btn supprimer l'article -----
+let btnSupprimer = document.querySelectorAll(".btnSupprimer");
 
+// 
+for(let s = 0; s < btnSupprimer.length; s++ ){
+ btnSupprimer[s].addEventListener("click", (event) => {
+  event.preventDefault();
+  // selection de l'id du produit  qui va etre supprimer 
+    let idSelectionnerSupp = copyLS[s]._id;
+     console.log(idSelectionnerSupp);
+    
+  
+  // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn supp à ètè cliquè
+  copyLS = copyLS.filter( (el) => el._id !== idSelectionnerSupp);
+
+ // on envoie la variable dans le local storage 
+ // trasf en format JSON et envoyer dans la key "products" du LS
+ localStorage.setItem(
+   "products",
+   JSON.stringify(copyLS)
+ );
+
+// alert on a supprime un produit
+alert( " une  produit a été supprimé");
+window.location.href = "panier.html";
+
+ })
+}
 
   
   

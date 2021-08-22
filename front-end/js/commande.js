@@ -5,8 +5,8 @@
 
 
 function  displayCommandeEtTotalPrice(){
-  const totalConfirmation = document.querySelector(".display-price");
-  const commandeId = document.querySelector(".display-orderId");
+  const totalConfirmation = document.querySelector(".tot_price");
+  const commandeId = document.querySelector(".orderId");
  
   totalConfirmation.innerText = localStorage.getItem("total");
   commandeId.innerText = localStorage.getItem("orderId");
