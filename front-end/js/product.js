@@ -62,7 +62,7 @@ function getArticles() {
       }).format(article.price);
 
       let verniceSelect = document.getElementById("#vernice-select");
-      for (let i = 0; i < verniceSelect.length; i++) {
+      for (let i = 0; i < article.vernice.length; i++) {
         let option = document.createElement("option");
         option.innerHtml = article.vernice[i];
         verniceSelect.appendChild(option);
@@ -88,7 +88,7 @@ function AjoutPanier() {
         quantity: parseFloat(document.querySelector("#numero").value),
         totalPrice: parseFloat(productCardPrice.innerText.replace(/\s/g, "")) * parseFloat(document.querySelector("#numero").value)
       };
-
+      
       // ------ LOCALSTORAGE
       let arrayProductsInCart = [];
 
@@ -108,7 +108,7 @@ function AjoutPanier() {
       // affichage
       confirmation.style.visibility = "visible";
       textConfirmation.innerText = `Vous avez ajouté ${numberObj.value} forniture a votre panier!`;
-      setTimeout("locatio.reload(true);", 4000);
+      setTimeout("location.reload(true);", 4000);
     } else {
       confirmation.style.visibility = "visible";
       textConfirmation.style.background = "red";

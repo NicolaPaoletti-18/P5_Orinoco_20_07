@@ -10,6 +10,8 @@ function  displayCommandeEtTotalPrice(){
  
   totalConfirmation.innerText = localStorage.getItem("total");
   commandeId.innerText = localStorage.getItem("orderId");
+  
+  localStorage.clear();
 
 }
 

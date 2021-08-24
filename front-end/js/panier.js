@@ -49,7 +49,7 @@ function displayPanier() {
     let btnSupprimer = document.createElement("button");
     btnSupprimer.classList.add("btnSupprimer");
     productRow.appendChild(btnSupprimer);
-    btnSupprimer.innerText = "supprimer article";
+    btnSupprimer.innerHTML = `<i class="far fa-trash-alt"></i> `;
 
     // Affichage du prix  €
     productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
@@ -80,12 +80,12 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
  btnSupprimer[s].addEventListener("click", (event) => {
   event.preventDefault();
   // selection de l'id du produit  qui va etre supprimer 
-    let idSelectionnerSupp = copyLS[s]._id;
-     console.log(idSelectionnerSupp);
+    let productSelectionnerSupp = copyLS[s].productAdded ;
+     console.log(productSelectionnerSupp);
     
   
   // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn supp à ètè cliquè
-  copyLS = copyLS.filter( (el) => el._id !== idSelectionnerSupp);
+  copyLS = copyLS.filter( (el) => el.productAdded !== productSelectionnerSupp);
 
  // on envoie la variable dans le local storage 
  // trasf en format JSON et envoyer dans la key "products" du LS
@@ -98,7 +98,7 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
 alert( " une  produit a été supprimé");
 window.location.href = "panier.html";
 
- })
+ });
 }
 
   
@@ -162,11 +162,11 @@ submit.addEventListener("click", (e) => {
    
     const order = {
       contact: {
-        firstName: inputName.value,
-        lastName: inputLastName.value,
-        city: inputCity.value,
-        address: inputAdress.value,
-        email: inputMail.value,
+        firstName: localStorage.setItem("firstName", inputName.value),
+        lastName:localStorage.setItem("lastName", inputLastName.value),
+        city:localStorage.setItem("lastCity", inputCity.value),
+        address:localStorage.setItem("adress", inputAdress.value),
+        email: localStorage.setItem("email", inputMail.value),
       },
       products: productsBought,
     }; 
@@ -174,7 +174,7 @@ submit.addEventListener("click", (e) => {
     // -------  Envoi de la requête POST au back-end --------
     // Création de l'entête de la requête
     const options = {
-      method: "POST",
+      method: "post",
       body: JSON.stringify(order),
       headers: { "Content-Type": "application/json" },
     };
@@ -184,20 +184,21 @@ submit.addEventListener("click", (e) => {
     priceConfirmation = priceConfirmation.split(" :");
 
     // Envoie de la requête avec l'en-tête. On changera de page avec un localStorage qui ne contiendra plus que l'order id et le prix.
-    fetch("http://localhost:3000/api/furniture/order", options)
-      .then((response) => response.json())
-      .then((data) => {
+    fetch("http://localhost:3000/api/furniture/order", options).then((response) =>
+       response.json() .then((data) => {
+     
         localStorage.clear();
-        
         localStorage.setItem("orderId", data.orderId);
         localStorage.setItem("total", priceConfirmation[1]);
+        
 
         //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
          window.location.href = "commande.html";
       })
       .catch((err) => {
         alert("Il y a eu une erreur : " + err);
-      });
+      })
+      );
     }
 
   });
