@@ -83,7 +83,7 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
  btnSupprimer[s].addEventListener("click", (event) => {
   event.preventDefault();
   // selection de l'id du produit  qui va etre supprimer 
-    let productSelectionnerSupp = copyLS._id ;
+    let productSelectionnerSupp = copyLS[s]._id ;
      console.log(productSelectionnerSupp);
     
   
@@ -96,11 +96,10 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
    "products",
    JSON.stringify(copyLS)
  );
- arrayProductsInCart = localStorage.getItem("products");
-
- let sum = 0
- arrayProductsInCart.forEach(e => sum = sum + e.totalPrice)
- localStorage.setItem("total", sum);
+// calcul du total et mise dans le LocalStorage
+let sum = 0
+copyLS.forEach(e => sum = sum + e.totalPrice )
+localStorage.setItem("total", sum);
 
 // alert on a supprime un produit
 alert( " une  produit a été supprimé");
@@ -207,14 +206,15 @@ submit.addEventListener("click", (e) => {
     // Envoie de la requête avec l'en-tête. On changera de page avec un localStorage qui ne contiendra plus que l'order id et le prix.
     fetch("http://localhost:3000/api/furniture/order", options).then((response) =>
        response.json() .then((data) => {
-        localStorage.clear();
+        
+         localStorage.clear();
         console.log(data);
         localStorage.setItem("orderId", data.orderId);
         localStorage.setItem("total", priceConfirmation[1]);
-        
+     
 
         //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
-        document.location.href = "commande.html";
+        //document.location.href = "commande.html";
       })
       .catch((err) => {
         alert("Il y a eu une erreur : " + err);
