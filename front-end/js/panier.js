@@ -1,3 +1,5 @@
+
+
 let panier = document.querySelector(".panier-card__recap");
 let copyLS = JSON.parse(localStorage.getItem("products"));
 
@@ -57,11 +59,12 @@ function displayPanier() {
       currency: "EUR",
     }).format(copyLS[produit].totalPrice);
   }
+
 }
 
 
 function priceTotalPanier() {
-  //let arrayOfPrice = [];
+  console.log("pass");
   let totalPrice = document.querySelector(".total");
   let totalLS = JSON.parse(localStorage.getItem("total"));
 
@@ -80,12 +83,12 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
  btnSupprimer[s].addEventListener("click", (event) => {
   event.preventDefault();
   // selection de l'id du produit  qui va etre supprimer 
-    let productSelectionnerSupp = copyLS[s].productAdded ;
+    let productSelectionnerSupp = copyLS._id ;
      console.log(productSelectionnerSupp);
     
   
   // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn supp à ètè cliquè
-  copyLS = copyLS.filter( (el) => el.productAdded !== productSelectionnerSupp);
+  copyLS = copyLS.filter( (el) => el._id !== productSelectionnerSupp);
 
  // on envoie la variable dans le local storage 
  // trasf en format JSON et envoyer dans la key "products" du LS
@@ -93,6 +96,11 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
    "products",
    JSON.stringify(copyLS)
  );
+ arrayProductsInCart = localStorage.getItem("products");
+
+ let sum = 0
+ arrayProductsInCart.forEach(e => sum = sum + e.totalPrice)
+ localStorage.setItem("total", sum);
 
 // alert on a supprime un produit
 alert( " une  produit a été supprimé");
@@ -113,7 +121,7 @@ function toEmptyPanier() {
     e.preventDefault();
     localStorage.clear();
 
-    // ----alert panier vide 
+    // ----alert panier vide -------
     alert(" LE PANIER A' été VIDE  Retour aux pages de produits ");
 
 
@@ -125,6 +133,7 @@ function toEmptyPanier() {
 function checkFormAndPostRequest() {
    
   // Inputs récupère dans le DOM. 
+
   const submit = document.querySelector("#submit");
   let inputName = document.querySelector("#name");
   let inputLastName = document.querySelector("#lastname");
@@ -139,6 +148,7 @@ function checkFormAndPostRequest() {
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
+ console.log("pass0");
   if (
     !inputName.value ||
     !inputLastName.value ||
@@ -149,28 +159,37 @@ submit.addEventListener("click", (e) => {
     !inputPhone.value
   ) {
     erreur.innerHTML = "Vous devez renseigner tous les champs !";
+   
     e.preventDefault();
   } else if (isNaN(inputPhone.value)) {
+    console.log("pass2");
     e.preventDefault();
     erreur.innerText = "Votre numéro de téléphone n'est pas valide";
   } else {
+     
+ 
+  // Si le formulaire est valide, le tableau productsBought contiendra un tableau d'objet qui sont les produits acheté, et order contiendra ce tableau ainsi que l'objet qui contient les infos de l'acheteur
+      
+  let forniture= [];
+  forniture.push(copyLS);
 
-    // Si le formulaire est valide, le tableau productsBought contiendra un tableau d'objet qui sont les produits acheté, et order contiendra ce tableau ainsi que l'objet qui contient les infos de l'acheteur
-    let productsBought = [];
-    productsBought.push(copyLS);
+  
     
-   
+    // ---------order 
     const order = {
       contact: {
-        firstName: localStorage.setItem("firstName", inputName.value),
-        lastName:localStorage.setItem("lastName", inputLastName.value),
-        city:localStorage.setItem("lastCity", inputCity.value),
-        address:localStorage.setItem("adress", inputAdress.value),
-        email: localStorage.setItem("email", inputMail.value),
-      },
-      products: productsBought,
-    }; 
+        firstName: inputName.value,
+        lastName:inputLastName.value,
+        address:inputAdress.value,
+        city: inputCity.value,
+        email: inputMail.value,
 
+       },
+       products: forniture
+    }; 
+    
+
+    
     // -------  Envoi de la requête POST au back-end --------
     // Création de l'entête de la requête
     const options = {
@@ -183,24 +202,27 @@ submit.addEventListener("click", (e) => {
     let priceConfirmation = document.querySelector(".total").innerText;
     priceConfirmation = priceConfirmation.split(" :");
 
+   
+
     // Envoie de la requête avec l'en-tête. On changera de page avec un localStorage qui ne contiendra plus que l'order id et le prix.
     fetch("http://localhost:3000/api/furniture/order", options).then((response) =>
        response.json() .then((data) => {
-     
         localStorage.clear();
+        console.log(data);
         localStorage.setItem("orderId", data.orderId);
         localStorage.setItem("total", priceConfirmation[1]);
         
 
         //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
-         window.location.href = "commande.html";
+        document.location.href = "commande.html";
       })
       .catch((err) => {
         alert("Il y a eu une erreur : " + err);
       })
       );
-    }
+    
 
-  });
+  }
+});
 
 }

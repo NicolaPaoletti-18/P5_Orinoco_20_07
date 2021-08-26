@@ -16,23 +16,13 @@ const verniceSelect = document.querySelector("#vernice-select");
 main();
 
 function main() {
-  //checkIf404(); 
+
   getArticles();
   AjoutPanier();
+
 }
 
-/* function checkIf404() {
-   window.addEventListener("error", (e) => {
-     let container = document.querySelector(".product-card");
-     container.innerHTML = `<p>Cette page n'existe pas.</br> <a class="back-to-home" href="index.html">Retourner dans la boutique ?</a></p>`;
-     container.style.padding = "40vh 0";
-     container.style.fontSize = "26px";
-     let backToHomeLink = document.querySelector(".back-to-home");
-     backToHomeLink.style.textDecoration = "underline";
-   },
-   false
- ); 
-}*/
+
 
 // Récupère le  produit dont on a besoin avec le peramètre dans la requete 
 function getArticles() {
@@ -50,9 +40,12 @@ function getArticles() {
     
     //Données recues via API 
     .then(function (article) {
+      
       productCardName.innerText = article.name;
       productCardImg.src = article.imageUrl;
       productCardDescription.innerText = article.description;
+      verniceSelect.innerText = article.varnish;
+     
 
       //Prix affiché en euros 
       article.price = article.price / 100;
@@ -61,11 +54,12 @@ function getArticles() {
         currency: "EUR"
       }).format(article.price);
 
-      let verniceSelect = document.getElementById("#vernice-select");
-      for (let i = 0; i < article.vernice.length; i++) {
+     
+      for (let i = 0; i < article.varnish.length; i++) {
         let option = document.createElement("option");
-        option.innerHtml = article.vernice[i];
-        verniceSelect.appendChild(option);
+        document.querySelector("#vernice-select").appendChild(option);
+        option.classList.add("varnish");
+        option.innerText = article.varnish[i];
       }
     });
 }

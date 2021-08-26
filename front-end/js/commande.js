@@ -17,7 +17,7 @@ function  displayCommandeEtTotalPrice(){
 
 
  // après on vide le panier pour recommencer a acheter
- const btnCommande = document.querySelector(".commande");
+ const btnCommande = document.querySelector(".back_to_home");
  
 
   //suppression de la key "products" du LS pour vider entierament le panier  
