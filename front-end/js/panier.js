@@ -78,7 +78,7 @@ function priceTotalPanier() {
 //---- gestion btn supprimer l'article -----
 let btnSupprimer = document.querySelectorAll(".btnSupprimer");
 
-// 
+// // event listener sur btn supprimer produit de chaque élément
 for(let s = 0; s < btnSupprimer.length; s++ ){
  btnSupprimer[s].addEventListener("click", (event) => {
   event.preventDefault();
@@ -87,11 +87,10 @@ for(let s = 0; s < btnSupprimer.length; s++ ){
      console.log(productSelectionnerSupp);
     
   
-  // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn supp à ètè cliquè
+  // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn  à ètè cliquè
   copyLS = copyLS.filter( (el) => el._id !== productSelectionnerSupp);
 
- // on envoie la variable dans le local storage 
- // trasf en format JSON et envoyer dans la key "products" du LS
+ // on modifie la liste dans le local storage et on recalcule le total
  localStorage.setItem(
    "products",
    JSON.stringify(copyLS)
@@ -108,7 +107,7 @@ window.location.href = "panier.html";
  });
 }
 
-  
+  // event listener sur cbouton supprimer produit de chaque élément
   
 function toEmptyPanier() {
   // Lorsque qu'on clique sur le btn, le panier se vide ainsi que le localStorage
@@ -144,10 +143,10 @@ function checkFormAndPostRequest() {
   let erreur = document.querySelector(".erreur");
 
 // check lors si apres le clic, si l'un des champs n'est pas rempli, on affiche une erreur. Aussi on verifie que dans le nombre il y a un nombre sinon erreur.
-
 submit.addEventListener("click", (e) => {
+
   e.preventDefault();
- console.log("pass0");
+ 
   if (
     !inputName.value ||
     !inputLastName.value ||
@@ -160,6 +159,7 @@ submit.addEventListener("click", (e) => {
     erreur.innerHTML = "Vous devez renseigner tous les champs !";
    
     e.preventDefault();
+
   } else if (isNaN(inputPhone.value)) {
     console.log("pass2");
     e.preventDefault();
@@ -167,10 +167,11 @@ submit.addEventListener("click", (e) => {
   } else {
      
  
-  // Si le formulaire est valide, le tableau productsBought contiendra un tableau d'objet qui sont les produits acheté, et order contiendra ce tableau ainsi que l'objet qui contient les infos de l'acheteur
-      
-  let forniture= [];
-  forniture.push(copyLS);
+ // Si le formulaire est valide, le tableau productsBought contiendra un tableau d'objet qui sont les produits acheté, et order contiendra ce tableau ainsi que l'objet qui contient les infos de l'acheteur
+ let productsBought = [];
+
+ copyLS.forEach(product => productsBought.push(product._id))
+
 
   
     
@@ -184,7 +185,7 @@ submit.addEventListener("click", (e) => {
         email: inputMail.value,
 
        },
-       products: forniture
+       products: productsBought,
     }; 
     
 
@@ -207,19 +208,19 @@ submit.addEventListener("click", (e) => {
     fetch("http://localhost:3000/api/furniture/order", options).then((response) =>
        response.json() .then((data) => {
         
-         localStorage.clear();
+        localStorage.clear();
         console.log(data);
         localStorage.setItem("orderId", data.orderId);
         localStorage.setItem("total", priceConfirmation[1]);
      
 
         //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
-        //document.location.href = "commande.html";
+        document.location.href = "commande.html";
       })
       .catch((err) => {
         alert("Il y a eu une erreur : " + err);
       })
-      );
+    );
     
 
   }
