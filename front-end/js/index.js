@@ -8,7 +8,7 @@ function getArticles() {
     .then(function (rep) {
       return rep.json();
     })
-    .catch((error) => {
+    .catch( (error) => {
       let productsContainer = document.querySelector(".productes-container");
       productsContainer.innerHTML =
       "<p>Nous n'avons pas réussi à afficher la page</p>";

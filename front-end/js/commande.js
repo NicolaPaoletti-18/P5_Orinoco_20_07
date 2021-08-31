@@ -26,7 +26,7 @@ function  displayCommandeEtTotalPrice(){
     localStorage.clear();
 
     // ----alert panier vide 
-    alert(" RECOMMENCER A ACHETER ");
+    alert("Retour à la page d'accueil");
 
 
     // ----Retour aux pages de produits 

@@ -10,6 +10,7 @@ function main(){
 
   displayPanier();
   priceTotalPanier();
+  btnSupprimerProduit();
   toEmptyPanier();
   checkFormAndPostRequest();
 
@@ -62,9 +63,10 @@ function displayPanier() {
 
 }
 
+//---------- récupérer le prix total à partir du LocalStorage --------
 
 function priceTotalPanier() {
-  console.log("pass");
+ 
   let totalPrice = document.querySelector(".total");
   let totalLS = JSON.parse(localStorage.getItem("total"));
 
@@ -74,42 +76,47 @@ function priceTotalPanier() {
   }).format(totalLS);
 }
 
+//---------------BTN SUPPRIMER ARTICLE-------------
+
+function btnSupprimerProduit(){
 
 //---- gestion btn supprimer l'article -----
+
 let btnSupprimer = document.querySelectorAll(".btnSupprimer");
 
-// // event listener sur btn supprimer produit de chaque élément
-for(let s = 0; s < btnSupprimer.length; s++ ){
- btnSupprimer[s].addEventListener("click", (event) => {
-  event.preventDefault();
-  // selection de l'id du produit  qui va etre supprimer 
-    let productSelectionnerSupp = copyLS[s]._id ;
-     console.log(productSelectionnerSupp);
-    
-  
-  // avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn  à ètè cliquè
-  copyLS = copyLS.filter( (el) => el._id !== productSelectionnerSupp);
+//--------- event listener sur btn supprimer produit de chaque élément---------
+  for(let s = 0; s < btnSupprimer.length; s++ ){
+   btnSupprimer[s].addEventListener("click", (event) => {
+      event.preventDefault();
+      // selection de l'id du produit  qui va etre supprimer 
+        let productSelectionnerSupp = copyLS[s]._id ;
+        console.log(productSelectionnerSupp);
+        
+      
+      // ---------avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn  à ètè cliquè---------
+      copyLS = copyLS.filter( (el) => el._id !== productSelectionnerSupp);
 
- // on modifie la liste dans le local storage et on recalcule le total
- localStorage.setItem(
-   "products",
-   JSON.stringify(copyLS)
- );
-// calcul du total et mise dans le LocalStorage
-let sum = 0
-copyLS.forEach(e => sum = sum + e.totalPrice )
-localStorage.setItem("total", sum);
+    //--------- on modifie la liste dans le local storage et on recalcule le total ---------
+      localStorage.setItem(
+      "products",
+      JSON.stringify(copyLS)
+      );
+    // ---------calcul du total et mise dans le LocalStorage ---------
+    let sum = 0
+    copyLS.forEach(e => sum = sum + e.totalPrice )
+      localStorage.setItem("total", sum);
 
-// alert on a supprime un produit
-alert( " une  produit a été supprimé");
-window.location.href = "panier.html";
+    // ---------alert on a supprime un produit ---------
+    alert( " une  produit a été supprimé");
+    window.location.href = "panier.html";
 
- });
+    });
+  }
 }
-
-  // event listener sur cbouton supprimer produit de chaque élément
   
+  // --------- Vidé tous le panier ---------
 function toEmptyPanier() {
+
   // Lorsque qu'on clique sur le btn, le panier se vide ainsi que le localStorage
   const btnToEmptyCart = document.querySelector(".to-empty-panier");
  
@@ -175,7 +182,7 @@ submit.addEventListener("click", (e) => {
 
   
     
-    // ---------order 
+    // ---------Object order que j'envoie au back-end  --------- 
     const order = {
       contact: {
         firstName: inputName.value,
