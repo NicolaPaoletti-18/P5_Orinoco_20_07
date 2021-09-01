@@ -55,6 +55,7 @@ function getArticles() {
         currency: "EUR"
       }).format(article.price);
 
+     //--------------affichè options varnish ------- 
      
       for (let i = 0; i < article.varnish.length; i++) {
         let option = document.createElement("option");

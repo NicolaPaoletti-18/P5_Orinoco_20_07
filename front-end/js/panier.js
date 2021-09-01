@@ -168,7 +168,7 @@ submit.addEventListener("click", (e) => {
     e.preventDefault();
 
   } else if (isNaN(inputPhone.value)) {
-    console.log("pass2");
+   
     e.preventDefault();
     erreur.innerText = "Votre numéro de téléphone n'est pas valide";
   } else {
