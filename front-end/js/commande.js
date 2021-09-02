@@ -3,7 +3,6 @@
  displayCommandeEtTotalPrice();
 
 
-
 function  displayCommandeEtTotalPrice(){
   const totalConfirmation = document.querySelector(".tot_price");
   const commandeId = document.querySelector(".orderId");
@@ -31,4 +30,4 @@ function  displayCommandeEtTotalPrice(){
 
     // ----Retour aux pages de produits 
     window.location.href = "index.html";
-    });
+  });

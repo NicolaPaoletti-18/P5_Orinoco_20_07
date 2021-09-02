@@ -4,7 +4,7 @@
 
 // Récupérer les articles depuis l'API
 function getArticles() {
-  fetch("  http://localhost:3000/api/furniture")
+  fetch("http://localhost:3000/api/furniture")
     .then(function (rep) {
       return rep.json();
     })

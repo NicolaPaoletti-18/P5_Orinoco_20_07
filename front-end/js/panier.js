@@ -28,6 +28,7 @@ function displayPanier() {
 
   // Chaque objet dans le tableu copié du LS, on va a crée des divs de l'affichage du panier et on va à les remplit avec les données du tableu.
   for (let produit in copyLS) {
+    console.log(copyLS);
     let productRow = document.createElement("div");
     panier.insertBefore(productRow, test);
     productRow.classList.add("panier-card__row");
@@ -36,6 +37,10 @@ function displayPanier() {
     productRow.appendChild(productName);
     productName.classList.add("panier-card__title");
     productName.innerHTML = copyLS[produit].name;
+
+    let ProductPriceUnit = document.createElement("div");
+    productRow.appendChild(ProductPriceUnit);
+    ProductPriceUnit.classList.add("price-unit");
 
     let productQuantity = document.createElement("div");
     productRow.appendChild(productQuantity);
@@ -48,17 +53,25 @@ function displayPanier() {
       "panier-card__title",
       "data-price",
       "price",
-    )
+    );
+
     let btnSupprimer = document.createElement("button");
     btnSupprimer.classList.add("btnSupprimer");
     productRow.appendChild(btnSupprimer);
     btnSupprimer.innerHTML = `<i class="far fa-trash-alt"></i> `;
 
-    // Affichage du prix  €
+    // Affichage du prix Total et prix unitaire  €
+   
     productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "EUR",
     }).format(copyLS[produit].totalPrice);
+
+    ProductPriceUnit.innerHTML = new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "EUR",
+    }).format(copyLS[produit].price);
+
   }
 
 }
@@ -78,7 +91,7 @@ function priceTotalPanier() {
 
 //---------------BTN SUPPRIMER ARTICLE-------------
 
-function btnSupprimerProduit(){
+function btnSupprimerProduit() {
 
 //---- gestion btn supprimer l'article -----
 
@@ -88,11 +101,11 @@ let btnSupprimer = document.querySelectorAll(".btnSupprimer");
   for(let s = 0; s < btnSupprimer.length; s++ ){
    btnSupprimer[s].addEventListener("click", (event) => {
       event.preventDefault();
+
       // selection de l'id du produit  qui va etre supprimer 
         let productSelectionnerSupp = copyLS[s]._id ;
         console.log(productSelectionnerSupp);
         
-      
       // ---------avec le méthode filter je selectionne les elements à garder et je supprime l'element où le btn  à ètè cliquè---------
       copyLS = copyLS.filter( (el) => el._id !== productSelectionnerSupp);
 
@@ -103,8 +116,9 @@ let btnSupprimer = document.querySelectorAll(".btnSupprimer");
       );
     // ---------calcul du total et mise dans le LocalStorage ---------
     let sum = 0
+
     copyLS.forEach(e => sum = sum + e.totalPrice )
-      localStorage.setItem("total", sum);
+     localStorage.setItem("total", sum);
 
     // ---------alert on a supprime un produit ---------
     alert( " une  produit a été supprimé");
@@ -118,8 +132,8 @@ let btnSupprimer = document.querySelectorAll(".btnSupprimer");
 function toEmptyPanier() {
 
   // Lorsque qu'on clique sur le btn, le panier se vide ainsi que le localStorage
+
   const btnToEmptyCart = document.querySelector(".to-empty-panier");
- 
 
   //suppression de la key "products" du LS pour vider entierament le panier  
   btnToEmptyCart.addEventListener('click', (e) => {
@@ -132,7 +146,7 @@ function toEmptyPanier() {
 
     // ----Retour aux pages de produits 
     window.location.href = "index.html";
-    });
+  });
 }
 
 function checkFormAndPostRequest() {
@@ -150,7 +164,7 @@ function checkFormAndPostRequest() {
   let erreur = document.querySelector(".erreur");
 
 // check lors si apres le clic, si l'un des champs n'est pas rempli, on affiche une erreur. Aussi on verifie que dans le nombre il y a un nombre sinon erreur.
-submit.addEventListener("click", (e) => {
+  submit.addEventListener("click", (e) => {
 
   e.preventDefault();
  
@@ -220,17 +234,17 @@ submit.addEventListener("click", (e) => {
         localStorage.setItem("orderId", data.orderId);
         localStorage.setItem("total", priceConfirmation[1]);
      
-
         //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
         document.location.href = "commande.html";
       })
-      .catch((err) => {
-        alert("Il y a eu une erreur : " + err);
-      })
+       .catch((err) => {
+         alert("Il y a eu une erreur : " + err);
+       })
+
     );
     
-
   }
-});
+
+  });
 
 }
